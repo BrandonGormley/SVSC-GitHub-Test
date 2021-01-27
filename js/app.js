@@ -5,11 +5,13 @@ const btnFacebook = document.querySelector('.btn-facebook');
 const btnAngular = document.querySelector('.btn-angular');
 const btnVue = document.querySelector('.btn-vue');
 const githubProfiles = document.querySelector('.profile-container');
+const filterInput = document.querySelector('.search-input');
 
 // Event Listeners
 btnFacebook.addEventListener('click', getFacebookProfiles);
 btnAngular.addEventListener('click', getAngularProfiles);
 btnVue.addEventListener('click', getVueProfiles);
+filterInput.addEventListener('keyup', filterProfiles);
 
 // Fetch Facebook Profiles
 async function getFacebookProfiles() {
@@ -81,4 +83,18 @@ async function getVueProfiles() {
   } catch (err) {
     console.log(`Looks like we have an error: ${err}`);
   }
+}
+
+// Filter Tasks
+function filterProfiles(e) {
+  const text = e.target.value.toLowerCase();
+
+  document.querySelectorAll('.profile-card').forEach(profile => {
+    const name = profile.textContent;
+    if (name.toLowerCase().indexOf(text) != -1) {
+      profile.style.display = 'block';
+    } else {
+      profile.style.display = 'none';
+    }
+  });
 }
