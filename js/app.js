@@ -35,26 +35,7 @@ async function getFacebookProfiles() {
   } catch (err) {
     console.log(`Looks like we have an error: ${err}`);
   }
-
-  // Fetching addiitonal data from user
-  const profileCards = document.querySelectorAll('.profile-card');
-  profileCards.forEach(profile => {
-    profile.addEventListener('click', e => {
-      let user = e.target.textContent;
-      console.log(user);
-      fetch(`https://api.github.com/users/${user}`)
-        .then(res => res.json())
-        .then(user => {
-          let userData = `
-          <li>Name: ${user.name}</li>
-          <li>Repos: ${user.repos_url}</li>
-          <li>Followers: ${user.followers}</li>
-          <li>Account Started: ${user.created_at}</li>
-        `;
-          profileInfo.innerHTML = userData;
-        });
-    });
-  });
+  fetchAdditionalInformation();
 }
 
 // Fetch Angular Profiles
@@ -79,6 +60,7 @@ async function getAngularProfiles() {
   } catch (err) {
     console.log(`Looks like we have an error: ${err}`);
   }
+  fetchAdditionalInformation();
 }
 
 // Fetch Angular Profiles
@@ -103,6 +85,7 @@ async function getVueProfiles() {
   } catch (err) {
     console.log(`Looks like we have an error: ${err}`);
   }
+  fetchAdditionalInformation();
 }
 
 // Filter Tasks
@@ -116,5 +99,29 @@ function filterProfiles(e) {
     } else {
       profile.style.display = 'none';
     }
+  });
+}
+
+///////////////////////////////////////////////
+// Fetching addiitonal data from user
+//////////////////////////////////////////////
+function fetchAdditionalInformation() {
+  const profileCards = document.querySelectorAll('.profile-card');
+  profileCards.forEach(profile => {
+    profile.addEventListener('click', e => {
+      let userName = profile.firstElementChild.textContent;
+      fetch(`https://api.github.com/users/${userName}`)
+        .then(res => res.json())
+        .then(user => {
+          let userData = `
+            <li class="list-item-info">Name: ${user.name}</li>
+            <li class="list-item-info">Repos: ${user.public_repos}</li>
+            <li class="list-item-info">Repos URL: <a href="${user.repos_url}">User Repos</a></li>
+            <li class="list-item-info">Followers: ${user.followers}</li>
+            <li class="list-item-info">Account Started: ${user.created_at}</li>
+          `;
+          profileInfo.innerHTML = userData;
+        });
+    });
   });
 }
