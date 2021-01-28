@@ -7,6 +7,7 @@ Web Page that fetch's user information from three different teams, and list the 
 - Vue Group
 
 When the team members are listed, you can then click on their profile card to retireve additional information.
+Search input to filter users by name.
 
 - Name
 - Repos
