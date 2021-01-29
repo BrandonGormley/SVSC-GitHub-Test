@@ -48,7 +48,6 @@ async function getAngularProfiles() {
 
     let output = ``;
     profiles.forEach(async profile => {
-      console.log(profile);
       output += `
         <div class="profile-card">
           <h3>${profile.login}</h3>
@@ -73,7 +72,6 @@ async function getVueProfiles() {
 
     let output = ``;
     profiles.forEach(async profile => {
-      console.log(profile);
       output += `
         <div class="profile-card">
           <h3>${profile.login}</h3>
