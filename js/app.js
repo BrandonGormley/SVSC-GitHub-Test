@@ -86,7 +86,7 @@ async function getVueProfiles() {
   fetchAdditionalInformation();
 }
 
-// Filter Tasks
+// Filter User Profiles
 function filterProfiles(e) {
   const text = e.target.value.toLowerCase();
 
